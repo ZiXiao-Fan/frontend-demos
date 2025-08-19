@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <script src="https://cdn.staticfile.net/jquery/1.10.2/jquery.min.js">
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+             background-color: #2d2c3f;
+        }
+        ul{
+            display: none;
+        }
+        li {
+            list-style: none;
+        }
+        div, li{
+            height: 50px;
+            width: 400px;
+            text-align: center;
+            line-height: 50px;
+            background:#ffffff;
+            color:#4d4d4d;
+            border-bottom: 1px #cccccc solid;
+        }
+        div{
+            transition: color 0.5s ease;
+        }
+        .active{
+            color: red;
+        }
+        li{
+            background-color: #444359;
+            color: #d8d8d8;
+            border-bottom: 1px #cccccc solid;
+        }
+        .arrow{
+            display: inline-block;
+            margin-left:150px;
+            transition: transform 0.5s ease;
+        }
+        .arrow.down{
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div>1<p class="arrow">></p></div>
+    <ul>
+        <li>1-1</li>
+        <li>1-2</li>
+        <li>1-3</li>
+    </ul>
+    <div>2<p class="arrow">></p></div>
+    <ul>
+        <li>2-1</li>
+        <li>2-2</li>
+        <li>2-3</li>
+    </ul>
+    <div>3<p class="arrow">></p></div>
+    <ul>
+        <li>3-1</li>
+        <li>3-2</li>
+        <li>3-3</li>
+    </ul>
+    <div>4<p class="arrow">></p></div>
+    <ul>
+        <li>4-1</li>
+        <li>4-2</li>
+        <li>4-3</li>
+    </ul>
+    <script>
+        $("div").click(function(){
+            //让点击的div中的箭头向下或者复原
+            $(this).children(".arrow").toggleClass("down")
+            //让点击的div中的文本变红或变回原色
+            $(this).toggleClass("active")
+            //展开或收起点击div对应的ul，收起其他ul
+            $(this).next().stop().slideToggle().siblings("ul").slideUp()
+            //删除其他div中的active保证其它div中的文本都是原色；删除其他div中箭头的down 保证其他箭头都是朝右
+            $(this).stop().siblings("div").removeClass("active").find(".arrow").removeClass("down")
+        })
+    </script>
+</body>
+</html>

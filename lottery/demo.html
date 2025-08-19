@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.net/jquery/1.10.2/jquery.min.js">
+    </script>
+    <style>
+        .wheel{
+            width: 500px;
+            height: 500px;
+            background: url(./img/wheel.jpg) no-repeat center;
+            background-size: cover;
+            position: relative;
+        }
+        .start{
+            width: 170px;
+            position: absolute;
+            top: 130px;
+            left: 160px;
+        }
+    </style>
+</head>
+<body>
+   <div style="position: relative;">
+    <div class="wheel"></div>
+    <img class="start" src="./img/pin.jpg" alt="">
+   </div>  
+   <script>
+     var start = 1080
+     //奖品列表
+     var prizes = ["30元现金券", "苹果手机一部", "10元红包", "50元话费券", "100红包", "6积分", "手表", "50积分"]
+     //每个奖品扇形区域的角度
+     var perAngle = 360 / prizes.length
+    $(".start").click(function(){
+        var d = Math.floor(Math.random()*(start + 360 - start + 1)) + start
+        $(".wheel").css({
+            "transition" : "all 2s",
+            "transform" : "rotate(" + d + "deg)" 
+        })
+        start = d + 1080
+        //三秒之后显示抽到的奖品
+        setTimeout(function(){
+            // 落点角度 
+            var realDeg = d % 360
+            //转换成索引值   
+            var index = Math.floor((360 - realDeg) / perAngle) 
+            alert("抽中奖品：" + prizes[index])
+        },3000)
+    })
+   </script>
+</body>
+</html>
